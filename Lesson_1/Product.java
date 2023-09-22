@@ -2,44 +2,86 @@ package Lesson_1;
 
 public class Product {
 
-    String name;
+    protected String name;
 
-    String brand;
+    protected String brand;
 
-    double price;
+    protected double price;
 
-    Product(){
-        name = "<Product>";
-        brand = "<Brand>";
-        price = 100;
+    public String getName() {
+        return name;
     }
 
-    Product(String name){
-        // brand = "ООО";
-        // price = 100;
-        this.name = name;
+    public void setName(String name) {
+        checkName(name);
     }
 
-    Product(String name, double price){
-        this.name = name;
-        this.price = price;
+    public String getBrand() {
+        return brand;
     }
 
-    Product(String brand, String name, double price){
+    public void setBrand(String brand) {
+        checkBrand(brand);
+    }
+
+    public double getPrice(){
+        return price;
+    }
+
+    public void setPrice(double price){
+        checkPrice(price);
+    }
+
+    public Product(){
+        this("<Product>");
+    }
+
+    public Product(String name){
+        this(name, 100);
+    }
+
+    public Product(String name, double price){
+        this("<Brand>", name, price);
+    }
+
+    public Product(String brand, String name, double price){
+        checkBrand(brand);
+        checkName(name);
+        checkPrice(price);
+    }
+
+
+    private void checkBrand(String brand){
         if (brand == null || brand.length() < 3){
             this.brand = "<Brand>";
         }
         else {
-         this.brand = brand;
+            this.brand = brand;
         }
-        this.name = name;
-        this.price = price;
+    }
+
+    private void checkName(String name){
+        if (name == null || name.length() < 3){
+            this.name = "<Product>";
+        }
+        else {
+            this.name = name;
+        }
+    }
+
+    private void checkPrice(double price){
+        if (price < 100){
+            this.price = 100;
+        }
+        else {
+            this.price = price;
+        }
     }
 
 
-    String displayInfo(){
+    public String displayInfo(){
         return String.format("%s - %s - %.2f", brand, name, price);
-        }
+    }
 
-    
+
 }
